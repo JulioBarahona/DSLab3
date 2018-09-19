@@ -1,0 +1,28 @@
+---
+title: 'Laboratorio #3: Reconocimiento de caracteres manuscritos'
+author: "Julio F. Barahona Martinez"
+date: "September 19, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Archivos obtenidos de la competencia en Kaggle, Digit Recognizer. <https://www.kaggle.com/c/digit-recognizer/data>.
+
+Se cargan los datos al memoria
+```{r Data, warning=FALSE, message=FALSE}
+library(readr)
+train <- read_csv("train.csv")
+test <- read_csv("test.csv")
+```
+
+# ## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
