@@ -17,7 +17,6 @@ if (!require("neuralnet"))    {install.packages("neuralnet");   library("neuraln
 if (!require("boot"))    {install.packages("boot");   library("boot")}
 if (!require("plyr"))    {install.packages("plyr");   library("plyr")}
 if (!require("readr"))    {install.packages("readr");   library("readr")}
-if (!require("DBI"))    {install.packages("DBI");   library("DBI")}
 
 train <- read_csv("train.csv")
 test <- read_csv("test.csv")
@@ -65,7 +64,7 @@ trainNN = scaled[index , ]
 testNN = scaled[-index , ]
 
 # fit neural network
-NN = neuralnet(label ~ ., trainNN, hidden = 3 , linear.output = T )
+NN <- neuralnet(label ~ pixel100 + pixel12 + pixel13 + pixel14 , data = trainNN, hidden = 3 , linear.output = T)
 
 # plot neural network
 plot(NN)
@@ -83,7 +82,7 @@ rm(min)
 
 ### Validacion cruzada 
 ```{r}
-k = 100
+'k = 100
 RMSE.NN = NULL
 
 List = list( )
@@ -106,7 +105,7 @@ for(j in 10:65){
     List[[j]] = RMSE.NN
 }
 
-Matrix.RMSE = do.call(cbind, List)
+Matrix.RMSE = do.call(cbind, List)'
 ```
 
 
