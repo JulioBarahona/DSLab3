@@ -12,10 +12,12 @@ Archivos obtenidos de la competencia en Kaggle, Digit Recognizer. <https://www.k
 
 Se cargan los datos al memoria
 ```{r Data, warning=FALSE, message=FALSE}
-install.packages("neuralnet ")
 
-library(readr)
-library(neuralnet)
+if (!require("neuralnet"))    {install.packages("neuralnet");   library("neuralnet")}
+if (!require("boot"))    {install.packages("boot");   library("boot")}
+if (!require("plyr"))    {install.packages("plyr");   library("plyr")}
+if (!require("readr"))    {install.packages("readr");   library("readr")}
+if (!require("DBI"))    {install.packages("DBI");   library("DBI")}
 
 train <- read_csv("train.csv")
 test <- read_csv("test.csv")
@@ -81,18 +83,6 @@ rm(min)
 
 ### Validacion cruzada 
 ```{r}
-## Cross validation of neural network model
-
-# install relevant libraries
-install.packages("boot")
-install.packages("plyr")
-
-# Load libraries
-library(boot)
-library(plyr)
-
-# Initialize variables
-set.seed(50)
 k = 100
 RMSE.NN = NULL
 
