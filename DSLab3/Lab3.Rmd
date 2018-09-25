@@ -12,7 +12,11 @@ Archivos obtenidos de la competencia en Kaggle, Digit Recognizer. <https://www.k
 
 Se cargan los datos al memoria
 ```{r Data, warning=FALSE, message=FALSE}
+install.packages("neuralnet ")
+
 library(readr)
+library(neuralnet)
+
 train <- read_csv("train.csv")
 test <- read_csv("test.csv")
 ```
@@ -49,10 +53,20 @@ max = apply(train , 2 , max)
 min = apply(train, 2 , min)
 scaled = as.data.frame(scale(train, center = min, scale = max - min))
 
-
 ```
 
-```{r}
+Red Neuronal
+```{r neural_network}
+
+# creating training and test set
+trainNN = scaled[index , ]
+testNN = scaled[-index , ]
+
+# fit neural network
+NN = neuralnet(label ~ . , trainNN, hidden = 3 , linear.output = T )
+
+# plot neural network
+plot(NN)
 
 ```
 
