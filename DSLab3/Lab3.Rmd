@@ -1,6 +1,6 @@
 ---
 title: 'Laboratorio #3: Reconocimiento de caracteres manuscritos'
-author: "Julio F. Barahona Martinez"
+author: "Julio Barahona , Davis Alvarez, Jorge Suchite"
 date: "September 19, 2018"
 output: html_document
 ---
@@ -17,12 +17,53 @@ train <- read_csv("train.csv")
 test <- read_csv("test.csv")
 ```
 
-# ## Including Plots
+### Analisis exploratorio
 
-You can also embed plots, for example:
+La variable **'label'** es de tipo cualitaiva 
+El resto de las columnas es de tipo numerico discreto
+Se eliminaron las columnas que tuvieran media de 0 ya que significa que no hay valores con cambio en todas las muestras
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+train <- train[, which(colMeans(train) != 0)]
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+Se seleccionan una parte de los datos de entrenamiento y te testeo
+
+```{r sampling}
+# Seleccion de datos 
+samplesize = 0.60 * nrow(train)
+set.seed(80)
+index = sample( seq_len ( nrow ( train ) ), size = samplesize )
+
+# Division  
+datatrain = train[ index, ]
+datatest = train[ -index, ]
+
+```
+
+Se re escalan los valores 
+```{r scailing}
+#valores maximos y minimos 
+max = apply(train , 2 , max)
+min = apply(train, 2 , min)
+scaled = as.data.frame(scale(train, center = min, scale = max - min))
+
+
+```
+
+```{r}
+
+```
+
+
+Limpieza de datos
+```{r}
+#limpieza de memoria
+rm(index)
+rm(max)
+rm(min)
+```
+
+
+
